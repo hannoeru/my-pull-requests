@@ -12,7 +12,7 @@ export default defineCachedEventHandler(async (event) => {
   // Fetch pull requests from user
   const { data } = await octokit.request('GET /search/issues', {
     q: `type:pr+author:"${user.username}"+-user:"${user.username}"+-org:"justincase-jp"`,
-    per_page: 50,
+    per_page: 100,
     page: 1,
   })
 
