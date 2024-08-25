@@ -29,4 +29,9 @@ export default defineNuxtConfig({
 
   // https://devtools.nuxt.com
   devtools: { enabled: true },
+
+  runtimeConfig: {
+    githubToken: '',
+    githubExcludedOrgs: '',
+  }
 })

@@ -1,6 +1,7 @@
 import type { Contributions, PullRequest, User } from '~~/types/index'
 
 export default defineCachedEventHandler(async (event) => {
+  const config = useRuntimeConfig(event)
   const octokit = useOctokit()
   // Fetch user from token
   const userResponse = await octokit.request('GET /user')
@@ -9,9 +10,10 @@ export default defineCachedEventHandler(async (event) => {
     username: userResponse.data.login,
     avatar: userResponse.data.avatar_url,
   }
+  const excludedOrgsQuery = config.githubExcludedOrgs.split(',').map(org => `-org:"${org}"`).join('+')
   // Fetch pull requests from user
   const { data } = await octokit.request('GET /search/issues', {
-    q: `type:pr+author:"${user.username}"+-user:"${user.username}"+-org:"justincase-jp"`,
+    q: `type:pr+author:"${user.username}"+-user:"${user.username}"+${excludedOrgsQuery}`,
     per_page: 100,
     page: 1,
   })
