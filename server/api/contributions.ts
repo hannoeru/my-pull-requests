@@ -23,7 +23,7 @@ export default defineCachedEventHandler(async (event) => {
   // For each PR, fetch the repository details
   for (const pr of filteredPrs) {
     const [owner, name] = pr.repository_url.split('/').slice(-2)
-    const repo = await fetchRepo(event, owner!, name!)
+    const repo = await fetchRepo(owner!, name!)
 
     prs.push({
       repo: `${owner}/${name}`,
@@ -46,5 +46,5 @@ export default defineCachedEventHandler(async (event) => {
   name: 'contributions',
   getKey: () => 'all',
   swr: true,
-  maxAge: 60 * 5, // 5 minutes
+  maxAge: 60 * 10, // 10 minutes
 })
