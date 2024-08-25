@@ -3,9 +3,9 @@ import { Octokit } from 'octokit'
 
 let _octokit: Octokit
 
-export function useOctokit() {
+export function useOctokit(event: H3Event) {
   if (!_octokit) {
-    const config = useRuntimeConfig()
+    const config = useRuntimeConfig(event)
     _octokit = new Octokit({
       auth: config.githubToken,
     })
@@ -14,10 +14,10 @@ export function useOctokit() {
 }
 
 // Read more about caching functions https://hub.nuxt.com/docs/features/cache#server-functions-caching
-export const fetchRepo = defineCachedFunction(async (owner: string, name: string) => {
+export const fetchRepo = defineCachedFunction(async (event: H3Event, owner: string, name: string) => {
   // Fetch repository details to get owner type
   console.log(`Fetching repository details for ${owner}/${name}`)
-  const { data } = await useOctokit().request('GET /repos/{owner}/{name}', {
+  const { data } = await useOctokit(event).request('GET /repos/{owner}/{name}', {
     owner,
     name,
   })

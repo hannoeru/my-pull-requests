@@ -2,7 +2,7 @@ import type { Contributions, PullRequest, User } from '~~/types/index'
 
 export default defineCachedEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
-  const octokit = useOctokit()
+  const octokit = useOctokit(event)
   // Fetch user from token
   const userResponse = await octokit.request('GET /user')
   const user: User = {
@@ -25,7 +25,7 @@ export default defineCachedEventHandler(async (event) => {
   // For each PR, fetch the repository details
   for (const pr of filteredPrs) {
     const [owner, name] = pr.repository_url.split('/').slice(-2)
-    const repo = await fetchRepo(owner!, name!)
+    const repo = await fetchRepo(event, owner!, name!)
 
     prs.push({
       repo: `${owner}/${name}`,
