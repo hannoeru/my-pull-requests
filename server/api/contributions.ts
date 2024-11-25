@@ -18,8 +18,14 @@ export default defineCachedEventHandler(async (event) => {
     page: 1,
   })
 
+  const { data: data2 } = await octokit.request('GET /search/issues', {
+    q: `type:pr+author:"${user.username}"+-user:"${user.username}"+${excludedOrgsQuery}`,
+    per_page: 100,
+    page: 2,
+  })
+
   // Filter out closed PRs that are not merged
-  const filteredPrs = data.items.filter(pr => !(pr.state === 'closed' && !pr.pull_request?.merged_at))
+  const filteredPrs = [...data, ...data2].items.filter(pr => !(pr.state === 'closed' && !pr.pull_request?.merged_at))
 
   const prs: PullRequest[] = []
   // For each PR, fetch the repository details
