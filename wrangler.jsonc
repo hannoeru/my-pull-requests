@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-pull-requests",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2025-12-21",
+  "assets": {
+    "directory": "./.output/public/",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+      "id": "75029648ff584879be208efb37999a11"
+    }
+  ]
+}

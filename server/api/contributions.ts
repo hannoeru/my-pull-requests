@@ -25,7 +25,7 @@ export default defineCachedEventHandler(async (event) => {
   })
 
   // Filter out closed PRs that are not merged
-  const filteredPrs = [...data, ...data2].items.filter(pr => !(pr.state === 'closed' && !pr.pull_request?.merged_at))
+  const filteredPrs = [...data.items, ...data2.items].filter(pr => !(pr.state === 'closed' && !pr.pull_request?.merged_at))
 
   const prs: PullRequest[] = []
   // For each PR, fetch the repository details
