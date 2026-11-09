@@ -19,14 +19,14 @@ function formatStars(stars: number) {
       :href="`https://github.com/${data.repo}`"
       target="_blank"
       relative
-      :class="['size-10 sm:size-12 shrink-0 border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm', data.type === 'Organization' ? 'rounded-lg' : 'rounded-full']"
+      :class="['size-10 sm:size-12 shrink-0 border border-neutral-200 dark:border-neutral-800 overflow-hidden shadow-sm', data.type === 'Organization' ? 'rounded-lg' : 'rounded-full']"
     >
       <img :src="`https://github.com/${data.repo.split('/')[0]}.png`" :alt="data.repo" class="size-full">
     </a>
 
     <div class="flex-1 flex justify-between gap-2 lg:gap-4 min-w-0">
       <div class="flex flex-col min-w-0 gap-0.5 sm:gap-1">
-        <a :href="data.url" target="_blank" class="text-sm sm:text-base flex items-center gap-0.5 sm:gap-1 hover:underline text-gray-900 dark:text-white">
+        <a :href="data.url" target="_blank" class="text-sm sm:text-base flex items-center gap-0.5 sm:gap-1 hover:underline text-neutral-900 dark:text-white">
           <UIcon
             name="i-ph-git-pull-request-duotone"
             :class="{
@@ -47,7 +47,7 @@ function formatStars(stars: number) {
           </a>
           <a :href="`https://github.com/${data.repo}`" target="_blank" class="items-center hidden sm:inline-flex gap-0.5 hover:text-black dark:hover:text-white truncate">
             <UIcon name="i-ph-star" class="size-3 shrink-0" />
-            <span class="text-xs text-gray-500 dark:text-gray-400">{{ formatStars(data.stars) }}</span>
+            <span class="text-xs text-neutral-500 dark:text-neutral-400">{{ formatStars(data.stars) }}</span>
           </a>
         </div>
       </div>
@@ -57,7 +57,7 @@ function formatStars(stars: number) {
           #{{ data.number }}
         </a>
 
-        <time :datatime="data.created_at" class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{{ useTimeAgo(new Date(data.created_at)) }}</time>
+        <time :datatime="data.created_at" class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">{{ useTimeAgo(new Date(data.created_at)) }}</time>
       </div>
     </div>
   </div>

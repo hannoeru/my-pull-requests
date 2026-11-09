@@ -17,6 +17,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
 
+  css: ['~/assets/css/main.css'],
+
   // https://hub.nuxt.com/docs/getting-started/installation#options
   hub: {
     cache: true,
