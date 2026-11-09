@@ -6,14 +6,12 @@ Create a website with an RSS feed of your recent GitHub pull requests across the
 
 Demo: https://prs.atinux.com
 
-[![Deploy to NuxtHub](https://hub.nuxt.com/button.svg)](https://hub.nuxt.com/new?template=my-pull-requests)
-
 ## Features
 
 - List the 50 most recent pull requests you've contributed to.
 - RSS feed
 - Only add your GitHub token to get started
-- One click deploy on 275+ locations for free
+- Runs on Cloudflare Workers
 
 ## Setup
 
@@ -53,15 +51,39 @@ pnpm build
 
 ## Deploy
 
-Deploy the application on the Edge with [NuxtHub](https://hub.nuxt.com) on your Cloudflare account:
+Create a KV namespace for the server cache:
 
 ```bash
-npx nuxthub deploy
+pnpm wrangler kv namespace create CACHE
 ```
 
-Then checkout your server cache, analaytics and more in the [NuxtHub Admin](https://admin.hub.nuxt.com).
+Put the namespace ID in the `CACHE` binding in `wrangler.jsonc`.
 
-You can also deploy using [Cloudflare Pages CI](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci).
+Set the GitHub token as a Worker secret:
+
+```bash
+pnpm wrangler secret put NUXT_GITHUB_TOKEN
+```
+
+Optional: set the organizations to exclude as a comma-separated list:
+
+```bash
+pnpm wrangler secret put NUXT_GITHUB_EXCLUDED_ORGS
+```
+
+Build the application and deploy it to Cloudflare Workers:
+
+```bash
+pnpm run deploy
+```
+
+Build the application and run the Worker locally:
+
+```bash
+pnpm preview
+```
+
+For `pnpm preview`, put local secrets in `.dev.vars`.
 
 ## Credits
 
