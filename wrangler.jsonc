@@ -1,12 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "my-pull-requests",
-  "main": "./.output/server/index.mjs",
-  "compatibility_date": "2025-12-21",
-  "assets": {
-    "directory": "./.output/public/",
-    "binding": "ASSETS"
-  },
+  "compatibility_date": "2026-11-09",
   "observability": {
     "enabled": true
   },
